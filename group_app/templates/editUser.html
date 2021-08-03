@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/subscriptions/sd/1">
+                <img id="logo" src="{% static 'logo_dark_grey_bg.png' %}" alt="subscription tracker logo"
+                    style="width:270px;height:50px; padding-bottom: 10px; margin-right: 100px;">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    <a href="/subscriptions/sd/1" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Subscriptions</a>
+                    <a href="/add_subscription" role="button" class="btn btn-sm btn-info ml-2 text-white">Add a
+                        Subscription</a>
+                    <!-- <a href="/stats/{{ logged_user.subscriptions.first.id }}" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Stats</a> -->
+                    </a> <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="errors">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>      <!--end errors-->
+        <h1>Edit Profile:</h1>
+        <form action="/process_edit_user" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for='first_name'>First Name:</label>
+                <input type="text" name="first_name" value="{{ logged_user.first_name }}" id='first_name'
+                    class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='last_name'>Last Name:</label>
+                <input type="text" name="last_name" value="{{ logged_user.last_name }}" id='last_name'
+                    class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='email'>Last Name:</label>
+                <input type="email" name="email" value="{{ logged_user.email }}" id='email' class='form-control'>
+            </div>
+            <input type="hidden" name="user_id" value="{{ logged_user.id }}">
+            <div class="form-group">
+                <button class='btn btn-primary' type="submit">Update Profile</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

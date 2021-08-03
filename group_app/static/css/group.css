@@ -1,0 +1,99 @@
+*{
+	padding: 5px;
+	margin: 0px;
+    box-sizing: border-box;
+}
+
+#container {
+
+    background-color: burlywood;
+    width: 100%;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0px;
+
+}
+
+#main {
+    display: flex;
+    justify-content: space-between;
+    background-color: burlywood;
+}
+
+
+.section {
+    display: inline-block;
+    width: 50%;
+    margin: 10px 5px;
+    background-color: blanchedalmond;
+}
+
+.section li{
+    width: 200px;
+    word-wrap: break-word;  
+}
+
+.block{
+    width: 2000px;    
+}
+
+.tempbox {
+    background-color: linen;
+    width: 410px;
+    height: 400px;
+    border: black;
+    border-style: solid;
+}
+
+.tempbox p{
+    word-wrap: break-word;  
+}
+
+.boxes {
+    display: inline-block;
+    margin: 5px 0px;
+}
+
+
+.message {
+    width: 50%;
+    margin: 0 5px;
+    background-color: rgb(109, 233, 233);
+}
+
+.comment {
+    width: 50%;
+    margin: 0 5px;
+    background-color: rgb(164, 241, 140);
+}
+
+#message {
+    color: white;
+}
+
+#comment {
+    color: black;
+    margin-left: 100px;
+}
+
+.mainimage img{
+    width: 550px;
+    height: 280px;
+    margin: 0 5px;
+    border-style: outset;
+    border-color: rgba(211, 211, 211, 0.733);
+    border-width: 5px;
+}
+
+.recipe a{
+    text-decoration: none;
+    font-size: x-large;
+    font-weight: bold;
+    color: rgb(92, 53, 2);
+    word-wrap: break-word;  
+}

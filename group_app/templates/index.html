@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+    <title>Login & Registration</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/subscriptions/sd/1">
+                <img id="logo" src="{% static 'logo_dark_grey_bg.png' %}" alt="subscription tracker logo"
+                    style="width:270px;height:50px; padding-bottom: 10px; margin-right: 100px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 30px;">
+        <div id="errors">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>      <!--end errors-->
+        <h2>Login</h2>
+        <form action="/check_login" method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id='email' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="passsword">Password:</label>
+                <input type="password" name="password" id='password' class='form-control'>
+            </div>
+            <input type="submit" value="Login" id="button-2">
+        </form>
+    </div>
+    <div class="container" style="margin-top: 100px;">
+        <h2>Registration</h2>
+        <form action="/check_registration" method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" name="first-name" id='first-name' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" name="last-name" id='last-name' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id='email' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="passsword">Password:</label>
+                <input type="password" name="password" id='password' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" name="confirm-password" id='password' class='form-control'>
+            </div>
+            <input type="submit" value="Register" id="button-1">
+        </form>
+    </div>
+</body>
+
+</html>

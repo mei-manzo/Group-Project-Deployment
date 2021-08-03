@@ -1,0 +1,45 @@
+*{
+	padding: 5px;
+	margin: 0px;
+    box-sizing: border-box;
+}
+
+.first-name{
+    margin-left:48px;
+}
+.last-name{
+    margin-left:50px;
+}
+
+.email{
+    margin-left: 81px;
+}
+
+.password{
+    margin-left: 58px;
+}
+
+body{
+    background-color: slategrey;
+    display: flex;
+}
+
+#container-1{
+    flex:1;
+}
+
+#container-2{
+    flex:1;
+    margin-top: 20px;
+}
+
+div{
+    margin-bottom: 20px;
+}
+#button-1{
+    width: 800px;
+}
+
+#button-2{
+    width: 800px;
+}

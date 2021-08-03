@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+    <title>Stats Page</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/subscriptions/sd/1">
+                <img id="logo" src="{% static 'logo_dark_grey_bg.png' %}" alt="subscription tracker logo"
+                    style="width:270px;height:50px; padding-bottom: 10px; margin-right: 100px;">
+            </a>
+            <p class="navbar-brand">Hello, {{user.first_name}}</p>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    <a href="/add_subscription" role="button" class="btn btn-sm btn-info ml-2 text-white">Add
+                        Subscription</a>
+                    <a href="/subscriptions/sd/1" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Subscriptions</a>
+                    </a>
+                    <a href="/user_account" role="button" class="btn btn-sm btn-info ml-2 text-white">Edit Profile</a>
+                    <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div id = "top-info" style="display: flex; margin-bottom: 10px;">
+        <!-- <div class="container"> -->
+            <div style="margin-left: 270px; margin-top: 20px;">Total subscriptions that you already had: {{all_subscriptions_count}}</div>
+            <form action="/select_sub_to_view" method="POST" style ="display: flex;">
+                {% csrf_token %}
+                <p style="margin-left: 100px; margin-top: 20px;">Display company:</p>
+                <select name="subscription_id" style="margin-left: 20px; height: 35px; margin-top: 15px;">
+                    {% for subscription in all_subscriptions %}
+                    <option value="{{ subscription.id }}">{{ subscription.company.company_name }}</option>
+                    {% endfor %}
+                </select>
+        <!-- </div> -->
+        <div>
+            <button type="submit" style="margin-left: 20px;  margin-top: 15px;" class='btn btn-primary'>Display</button>
+        </div>
+        </form>
+    </div>
+    {% for graph in list_graph %}
+    <img src="data:image/png;base64, {{graph|safe}}" style="margin-left: 250px; margin-bottom: 200px; ">
+    {% endfor %}
+    </div>
+</body>
+
+</html>

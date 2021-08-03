@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Subscription</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/subscriptions/sd/1">
+                <img id="logo" src="{% static 'logo_dark_grey_bg.png' %}" alt="subscription tracker logo"
+                    style="width:270px;height:50px; padding-bottom: 10px; margin-right: 100px;">
+            </a>
+            <p class="navbar-brand">Hello, {{ logged_user.first_name }}</p>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    <a href="/subscriptions/sd/1" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Subscriptions</a>
+                    <!-- <a href="/stats/{{ logged_user.subscriptions.first.id }}" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Stats</a> -->
+                    <a href="/user_account" role="button" class="btn btn-sm btn-info ml-2 text-white">Edit Profile</a>
+                    <a href="/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="errors">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>      <!--end errors-->
+        <h1>Add Subscription:</h1>
+        <form action="/process_add_subscription" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for='company_id'>Select a Company:</label>
+                <select name="company_id">
+                    <option value="-1">Please select or add company</option>
+                    {% for company in all_companies %}
+                    <option value="{{ company.id }}">{{ company.company_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for='company_name'>Or Add a New One:</label>
+                <input type="text" name="company_name" id='company_name' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='account'>Account:</label>
+                <input type="text" name="account" id='account' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='level'>Level:</label>
+                <input type="text" name="level" id='level' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='monthly_rate'>Monthly Rate:</label>
+                <input type="text" name="monthly_rate" id='monthly_rate' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='start_date'>Start Date:</label>
+                <input type="date" name="start_date" id='start_date' value="2021-07-29" class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for='duration'>Duration:</label>
+                <select name="duration" id='duration' class='form-control'>
+                    <option value="-1">-Select Duration of Membership-</option>
+                    <option value="Bi-annually">Bi-annually</option>
+                    <option value="Yearly">Yearly</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="user_id" value="{{ logged_user.id }}">
+                <button class='btn btn-primary' type="submit">Add Subscription</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
